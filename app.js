@@ -379,13 +379,32 @@ function setTheme(name){
 
   // Горячие клавиши (пропускаем ввод в полях)
 document.addEventListener('keydown', (e) => {
+  // игнорим ввод в полях и сочетания с модификаторами
   if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.isComposing)) return;
-  const k = e.key.toLowerCase();
-  if (k === 'n') { document.getElementById('btnNew').click(); }
-  else if (k === 'p') { document.getElementById('btnPng').click(); }
-  else if (k === 's') { document.getElementById('btnSvg').click(); }
-  else if (k === 'l') { document.getElementById('btnLink').click(); }
-  else if (k === 'i') { document.getElementById('btnInfo').click(); }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  switch (e.code) { // раскладка не влияет: KeyN, KeyP и т.д.
+    case 'KeyN':
+      e.preventDefault();
+      document.getElementById('btnNew').click();
+      break;
+    case 'KeyP':
+      e.preventDefault();
+      document.getElementById('btnPng').click();
+      break;
+    case 'KeyS':
+      e.preventDefault();
+      document.getElementById('btnSvg').click();
+      break;
+    case 'KeyL':
+      e.preventDefault();
+      document.getElementById('btnLink').click();
+      break;
+    case 'KeyI':
+      e.preventDefault();
+      document.getElementById('btnInfo').click();
+      break;
+  }
 });
 
 })();
