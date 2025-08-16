@@ -60,6 +60,24 @@ header{
   border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)
 }
 
+/* мерцание звёзд */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* дрожь неона */
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.4; }
+}
+.neon-sign {
+  animation: flicker 2.5s infinite;
+}
+
 /* ===== КНОПКИ ===== */
 .btn{
   appearance:none;cursor:pointer;user-select:none;

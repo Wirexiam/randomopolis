@@ -138,7 +138,9 @@ function generate(seedStr){
     const s  = document.createElementNS("http://www.w3.org/2000/svg","circle");
     s.setAttribute("cx",cx); s.setAttribute("cy",cy); s.setAttribute("r",r);
     s.setAttribute("fill", `${preset.starColor}${0.28 + rand()*0.6})`);
+    s.classList.add("star");
     stars.appendChild(s);
+
   }
   svg.appendChild(stars);
 
@@ -220,7 +222,9 @@ function generate(seedStr){
         sign.setAttribute("width",sw); sign.setAttribute("height",sh);
         sign.setAttribute("fill", choice(rand, neon));
         sign.setAttribute("filter","url(#glow)");
+        sign.classList.add("neon-sign");
         g.appendChild(sign);
+
       }
 
       x += w + (10 + Math.floor(rand()*20));
