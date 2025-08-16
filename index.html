@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Randomopolis — процедурный неон-скайлайн</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Случайный неон-скайлайн на SVG: сидируемые ссылки, PNG/SVG экспорт, темы, цитаты. Готово к деплою.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1220'/%3E%3Cpath d='M8 44h6V28h6v16h6V22h6v22h6V32h6v12h6v6H8z' fill='%23a8ff60'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap" id="app" data-theme="default">
+  <header>
+    <div class="container row">
+      <div class="brand panel">
+        <div class="logo">R</div>
+        <div>
+          Randomopolis
+          <div class="small">Случайный неон-скайлайн • сидируемые ссылки • PNG/SVG</div>
+        </div>
+      </div>
+
+      <div class="panel pill">Создайте мир мечты</div>
+
+      <div class="panel switch" role="group" aria-label="Темы">
+        <span class="small">Тема:</span>
+        <label class="radio"><input type="radio" name="theme" value="default" checked> Ночь</label>
+        <label class="radio"><input type="radio" name="theme" value="sunrise"> Рассвет</label>
+        <label class="radio"><input type="radio" name="theme" value="mono"> Моно</label>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="bg-grad" aria-hidden="true"></div>
+
+      <div class="canvas-wrap">
+        <svg id="scene" viewBox="0 0 1600 900" role="img" aria-label="Сгенерированный городской пейзаж"></svg>
+      </div>
+
+      <!-- Фиксированный HUD-overlay (всегда на экране) -->
+      <div class="hud" role="toolbar" aria-label="Панель управления сценой">
+        <button class="btn primary" id="btnNew" title="Сгенерировать новый">🎲 Сгенерировать</button>
+        <button class="btn success" id="btnPng" title="Скачать PNG">🖼️ PNG</button>
+        <button class="btn" id="btnSvg" title="Скачать SVG">SVG</button>
+        <button class="btn" id="btnLink" title="Скопировать ссылку на эту сцену">Ссылка на сцену</button>
+        <button class="btn ghost" id="btnInfo" title="О сцене">О сцене</button>
+      </div>
+    </section>
+
+    <div class="container">
+  <div class="caption">
+    <div class="quote" id="quote"></div>
+    <div class="meta" id="meta"></div>
+  </div>
+
+  <div class="grid">
+    <!-- Что это? для пользователя -->
+    <div class="panel">
+      <h2 style="margin:0 0 8px">Что это?</h2>
+      <p>Randomopolis — генеративный неон-скайлайн на SVG. Каждый кадр создаётся из <span class="tag">seed</span>-значения (в адресной строке после <code>#</code>), поэтому любая сцена воспроизводится 1:1 по ссылке.</p>
+      <ul>
+        <li><strong>Темы</strong>: Ночь / Рассвет / Моно — переключай в шапке.</li>
+        <li><strong>Экспорт</strong>: сохраняй результат в PNG (высокое качество) или в оригинальный SVG.</li>
+        <li><strong>Сидируемые ссылки</strong>: делись точной сценой одной кнопкой.</li>
+      </ul>
+    </div>
+
+    <!-- Управление — компактно и по делу -->
+    <div class="panel">
+      <h2 style="margin:0 0 8px">Управление</h2>
+      <ul style="margin:0">
+        <li>🎲 <b>Сгенерировать</b> — создаёт новый кадр с новым seed.</li>
+        <li>🖼️ <b>PNG</b> — сохранить изображение в PNG.</li>
+        <li><b>SVG</b> — скачать векторный оригинал.</li>
+        <li><b>Ссылка на сцену</b> — копировать URL текущего кадра.</li>
+        <li><b>О сцене</b> — краткая справка и метаданные.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Панель: Поделиться сценой -->
+  <div class="panel" style="margin-top:22px">
+    <h2 style="margin:0 0 8px">Поделиться сценой</h2>
+    <p style="margin:0 0 10px">Нажми «Ссылка на сцену», чтобы скопировать точный кадр. В ссылке зашит <code>#seed</code>, поэтому другая сторона увидит ровно тот же город.</p>
+    <div class="small">Пример: <code>https://example.com/#a1b2c3d4</code></div>
+  </div>
+
+  <!-- Панель: Советы -->
+  <div class="panel" style="margin-top:22px">
+    <h2 style="margin:0 0 8px">Советы</h2>
+    <ul style="margin:0">
+      <li>Для обложек старайся подбирать кадры с высокой «плотностью окон» и мостом на горизонте — выглядит кинематографично.</li>
+      <li>Тема <b>Моно</b> лучше подходит для печати, <b>Рассвет</b> — для соцсетей.</li>
+      <li>SVG можно редактировать в Figma/Illustrator: меняй цвета неона, добавляй логотипы.</li>
+    </ul>
+  </div>
+
+  <!-- Панель: Горячие клавиши -->
+  <div class="panel" style="margin-top:22px">
+    <h2 style="margin:0 0 8px">Горячие клавиши</h2>
+    <ul style="margin:0">
+      <li><kbd>N</kbd> — Сгенерировать</li>
+      <li><kbd>P</kbd> — Сохранить PNG</li>
+      <li><kbd>S</kbd> — Скачать SVG</li>
+      <li><kbd>L</kbd> — Скопировать ссылку</li>
+      <li><kbd>I</kbd> — О сцене</li>
+    </ul>
+  </div>
+
+  <!-- Панель: FAQ -->
+  <div class="panel" style="margin-top:22px">
+    <h2 style="margin:0 0 8px">FAQ</h2>
+    <p style="margin:6px 0 0"><b>Почему у меня другая картинка?</b><br>Смотри хэш в адресной строке. Если он отличается — сцена тоже будет другой. Скопируй ссылку кнопкой «Ссылка на сцену».</p>
+    <p style="margin:6px 0 0"><b>Можно ли использовать коммерчески?</b><br>PNG/SVG — твои, используй как хочешь. При публичном использовании указывай «Randomopolis» и ссылку на проект (по желанию).</p>
+  </div>
+</div>
+
+  </main>
+
+  <footer>
+    <div class="container row" style="justify-content:space-between">
+      <div class="small">© Randomopolis. Генеративный арт без зависимостей.</div>
+      <div class="small">Сделано с любовью к SVG и случайности.</div>
+    </div>
+  </footer>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
