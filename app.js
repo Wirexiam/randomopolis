@@ -129,21 +129,18 @@ function generate(seedStr){
   svg.appendChild(vignette);
 
   // ===== звёзды
-    const stars = document.createElementNS("http://www.w3.org/2000/svg","g");
-    const starCount = 220 + Math.floor(rand()*220);
-    for(let i=0;i<starCount;i++){
+  const stars = document.createElementNS("http://www.w3.org/2000/svg","g");
+  const starCount = 220 + Math.floor(rand()*220);
+  for(let i=0;i<starCount;i++){
     const cx = Math.floor(rand()*1600);
     const cy = Math.floor(rand()*560);
     const r  = rand()*1.2 + 0.2;
     const s  = document.createElementNS("http://www.w3.org/2000/svg","circle");
     s.setAttribute("cx",cx); s.setAttribute("cy",cy); s.setAttribute("r",r);
     s.setAttribute("fill", `${preset.starColor}${0.28 + rand()*0.6})`);
-    s.classList.add("star");
-    s.style.setProperty("--rand", rand().toFixed(2));
     stars.appendChild(s);
-    }
-    svg.appendChild(stars);
-
+  }
+  svg.appendChild(stars);
 
   // ===== вода/туман
   const water = document.createElementNS("http://www.w3.org/2000/svg","rect");
@@ -196,28 +193,25 @@ function generate(seedStr){
       building.setAttribute("fill", `rgba(10,20,40,${0.45 + L*0.12})`);
       g.appendChild(building);
 
-    // окна
-    const wx = 4 + Math.floor(rand()*6);
-    const wy = 4 + Math.floor(rand()*6);
-    for(let yy=y+6; yy<y+hB-6; yy+=wy+3){
-    for(let xx=x+5; xx<x+w-5; xx+=wx+3){
-        if(rand() > 0.62){
-        const light = document.createElementNS("http://www.w3.org/2000/svg","rect");
-        light.setAttribute("x",xx); light.setAttribute("y",yy);
-        light.setAttribute("width",wx); light.setAttribute("height",wy);
-        const c = choice(rand, neon);
-        light.setAttribute("fill", c);
-        light.setAttribute("opacity", (0.35 + rand()*0.55).toFixed(2));
-        light.classList.add("window");
-        light.style.setProperty("--rand", rand().toFixed(2));
-        g.appendChild(light);
+      // окна
+      const wx = 4 + Math.floor(rand()*6);
+      const wy = 4 + Math.floor(rand()*6);
+      for(let yy=y+6; yy<y+hB-6; yy+=wy+3){
+        for(let xx=x+5; xx<x+w-5; xx+=wx+3){
+          if(rand() > 0.62){
+            const light = document.createElementNS("http://www.w3.org/2000/svg","rect");
+            light.setAttribute("x",xx); light.setAttribute("y",yy);
+            light.setAttribute("width",wx); light.setAttribute("height",wy);
+            const c = choice(rand, neon);
+            light.setAttribute("fill", c);
+            light.setAttribute("opacity", (0.35 + rand()*0.55).toFixed(2));
+            g.appendChild(light);
+          }
         }
-    }
-    }
-
+      }
 
       // неоновая вывеска (иногда)
-        if(rand() > 0.78){
+      if(rand() > 0.78){
         const bx = x + 6 + rand()*(w-20);
         const by = y + 10 + rand()*(hB-30);
         const sign = document.createElementNS("http://www.w3.org/2000/svg","rect");
@@ -227,7 +221,7 @@ function generate(seedStr){
         sign.setAttribute("fill", choice(rand, neon));
         sign.setAttribute("filter","url(#glow)");
         g.appendChild(sign);
-        }
+      }
 
       x += w + (10 + Math.floor(rand()*20));
     }
@@ -235,16 +229,15 @@ function generate(seedStr){
   }
   svg.appendChild(skyline);
 
-    // ===== отражение в воде
-    const reflection = skyline.cloneNode(true);
-    reflection.setAttribute("transform","translate(0,1320) scale(1,-1)");
-    [...reflection.querySelectorAll('rect')].forEach(r=>{
+  // ===== отражение в воде
+  const reflection = skyline.cloneNode(true);
+  reflection.setAttribute("transform","translate(0,1320) scale(1,-1)");
+  [...reflection.querySelectorAll('rect')].forEach(r=>{
     const op = parseFloat(r.getAttribute('opacity')||'1');
     r.setAttribute('opacity', String(op*0.18));
     r.setAttribute('fill','rgba(100,140,200,0.25)');
-    });
-    reflection.classList.add("reflection");
-    svg.appendChild(reflection);
+  });
+  svg.appendChild(reflection);
 
   // ===== туман у горизонта
   const fogGrad = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
@@ -252,15 +245,10 @@ function generate(seedStr){
   const fs1 = document.createElementNS("http://www.w3.org/2000/svg","stop"); fs1.setAttribute("offset","0%"); fs1.setAttribute("stop-color", preset.fogTop);
   const fs2 = document.createElementNS("http://www.w3.org/2000/svg","stop"); fs2.setAttribute("offset","100%"); fs2.setAttribute("stop-color","rgba(0,0,0,0)");
   defs.appendChild(fogGrad); fogGrad.appendChild(fs1); fogGrad.appendChild(fs2);
- const fog = document.createElementNS("http://www.w3.org/2000/svg","rect");
- fog.setAttribute("x","0"); 
- fog.setAttribute("y","610"); 
- fog.setAttribute("width","1600"); 
- fog.setAttribute("height","80");
- fog.setAttribute("fill","url(#fog)");
- fog.classList.add("fog");   // 🔥 добавили класс
- svg.appendChild(fog);
-
+  const fog = document.createElementNS("http://www.w3.org/2000/svg","rect");
+  fog.setAttribute("x","0"); fog.setAttribute("y","610"); fog.setAttribute("width","1600"); fog.setAttribute("height","80");
+  fog.setAttribute("fill","url(#fog)");
+  svg.appendChild(fog);
 
   // ===== цитата + мета
   const [q,a] = choice(rand, QUOTES);

@@ -153,57 +153,6 @@ kbd{
   font-size: 12px;
 }
 
-/* ===== АНИМАЦИИ ===== */
-
-/* звёзды */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-.star {
-  animation: twinkle 3s ease-in-out infinite;
-  animation-delay: calc(-1s * var(--rand, 0)); /* разный сдвиг */
-}
-
-/* окна */
-@keyframes windowOnOff {
-  0%, 85%, 100% { opacity: 1; }
-  90% { opacity: 0; }
-}
-.window {
-  animation: windowOnOff 8s infinite;
-  animation-delay: calc(var(--rand, 0) * 5s);
-}
-
-/* туман */
-@keyframes fogBreath {
-  0%, 100% { opacity: 0.4; transform: translateY(0); }
-  50% { opacity: 0.7; transform: translateY(-6px); }
-}
-.fog {
-  animation: fogBreath 12s ease-in-out infinite;
-}
-
-/* отражение воды */
-@keyframes ripple {
-  0%, 100% { transform: translate(0,1320) scale(1,-1); }
-  50% { transform: translate(0,1322) scale(1,-1.01); }
-}
-.reflection {
-  animation: ripple 6s ease-in-out infinite;
-  transform-origin: center;
-}
-
-/* небо */
-@keyframes skyShift {
-  0%,100% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(8deg); }
-}
-#scene {
-  animation: skyShift 40s ease-in-out infinite;
-}
-
-
 /* ===== АДАПТИВКА ===== */
 
 /* Мобильные до 480px */
